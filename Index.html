@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Xofii</title>
+    <style>
+    /* Reset default margin dan padding */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    /* Styling untuk body dan html */
+    html, body {
+    width: 100%;
+    height: 100%; /* Pastikan body dan html mencakup seluruh tinggi viewport */
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    }
+
+    /* Styling untuk header */
+    header {
+    background: #333; /* Ganti warna header sesuai kebutuhan */
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Memastikan header memiliki lebar penuh */
+    }
+
+    /* Logo styling */
+    header .logo {
+    display: flex;
+    align-items: center;
+    }
+
+    .logo-image {
+    width: 50px; /* Ukuran gambar logo */
+    height: auto;
+    margin-right: 10px; /* Jarak antara gambar dan teks logo */
+    }
+
+    /* Styling untuk nav */
+    header nav {
+    display: flex;
+    margin-left: auto;
+    }
+
+    header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 5px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+    }
+
+    header nav a:hover {
+    color: #ffcc00; /* Warna saat hover */
+    }
+
+    /* Styling untuk search bar */
+    .search-bar {
+    display: flex;
+    align-items: stretch; /* Memastikan tinggi input dan tombol sejajar */
+    }
+
+    .search-bar input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px; /* Membulatkan sisi kiri saja */
+    height: 40px; /* Menyelaraskan tinggi input dan tombol */
+    flex: 1; /* Memastikan input mengambil ruang yang tersedia */
+    box-sizing: border-box; /* Menyertakan padding dalam ukuran total */
+    }
+
+    .search-bar button {
+    padding: 0 16px;
+    background-color: #294066; /* Ganti warna menjadi biru gelap */
+    border: none;
+    border-radius: 0 5px 5px 0;
+    color: #fff; /* Warna teks */
+    cursor: pointer;
+    transition: background 0.3s;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .search-bar button:hover {
+        background-color: #1f324e; /* Warna biru yang lebih gelap saat hover */
+    }
+
+    /* CSS untuk menampilkan berita dalam grid */
+    .main {
+        padding: 20px;
+    }
+
+    .news-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 20px;
+    }
+
+    .news-item {
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 10px;
+    }
+
+    .news-item h3 {
+        margin-bottom: 10px;
+    }
+
+    .news-item p {
+        margin-bottom: 10px;
+    }
+
+    .news-item a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .news-item a:hover {
+        color: #007BFF;
+    }
+
+    .news-image {
+        width: 100%; /* Mengatur lebar gambar agar sesuai dengan kontainer */
+        height: auto; /* Memastikan aspek rasio gambar tetap */
+        border-radius: 8px; /* Menambahkan sudut membulat pada gambar */
+        margin-top: 10px; /* Memberikan jarak antara gambar dan teks */
+    }
+
+    /* Styling untuk konten video */
+    .content {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .content h1 {
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 28px;
+        color: #333;
+    }
+
+    /* Styling untuk video grid */
+    .video-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .video {
+        background-color: #fff;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .video iframe {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+    }
+
+    .video p {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #555;
+    }
+
+    /* Styling untuk footer */
+    footer {
+        background-color: #333; /* Warna latar belakang footer */
+        color: #fff; /* Warna teks sama dengan header */
+        font-size: 18px; /* Ukuran font sama dengan header */
+        padding: 10px 20px;
+        display: flex; /* Menggunakan Flexbox sama seperti header */
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        width: 100%; /* Memastikan footer memiliki lebar penuh */
+        position: relative; /* Mengatasi masalah layout */
+        left: 0; /* Pastikan footer mulai dari tepi kiri */
+        right: 0; /* Pastikan footer berakhir di tepi kanan */
+    }
+
+    /* Styling untuk link di footer */
+    footer a {
+        color: #f39c12; /* Warna link */
+        text-decoration: none; /* Menghilangkan garis bawah pada link */
+        margin: 0 10px;
+        transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+        color: #fff;
+    }
+
+    /* Styling untuk copyright */
+    footer .copyright {
+        margin-top: 10px;
+        font-size: 18px;
+        color: #fff;
+        text-align: center;
+    }
+
+    /* Tambahan styling untuk form */
+    form {
+        display: flex;
+        flex-direction: column;
+        margin: 20px 0;
+    }
+
+    form label {
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    /* Gaya tambahan untuk label */
+    label {
+        font-size: 1.2em; /* Ukuran font label */
+        margin-bottom: 5px; /* Jarak bawah dari label ke input */
+        display: block; /* Menjadikan label berada di baris terpisah */
+    }
+
+    input[type="text"],
+    input[type="email"] {
+        width: 100%; /* Membuat input mengambil lebar penuh */
+        padding: 10px; /* Menambahkan padding untuk kenyamanan */
+        margin-bottom: 15px; /* Jarak antara input */
+        border: 1px solid #ccc; /* Menambahkan border */
+        border-radius: 5px; /* Mengatur sudut border */
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50; /* Warna latar belakang tombol */
+        color: white; /* Warna teks tombol */
+        padding: 10px 20px; /* Padding tombol */
+        border: none; /* Menghilangkan border tombol */
+        border-radius: 5px; /* Mengatur sudut border tombol */
+        cursor: pointer; /* Menampilkan pointer saat hover */
+        font-size: 1em; /* Ukuran font tombol */
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049; /* Warna latar belakang saat hover */
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    /* Tambahan padding pada elemen main */
+    main {
+        padding: 20px; /* Tambahkan padding untuk memberi jarak pada teks */
+    }
+
+    /* Menambahkan indentasi pada paragraf */
+    p {
+        margin-left: 5px; /* Atur margin kiri agar sejajar dengan h2 */
+    }
+
+    /* Media Queries untuk responsif */
+    @media (max-width: 768px) {
+        header, footer {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .search-bar {
+            margin-top: 10px;
+        }
+
+        .content {
+            padding: 10px;
+        }
+
+        .video-grid {
+            grid-template-columns: 1fr; /* Satu kolom pada layar kecil */
+        }
+
+        .news-grid {
+            margin: 10px; /* Mengurangi margin untuk grid berita di layar kecil */
+        }
+    }
+
+    /* Styling untuk Sort by */
+    .sort-by {
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .sort-by label {
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .sort-by select {
+        padding: 5px;
+        font-size: 16px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="Xofii.png" alt="Logo" class="logo-image">
+            Xofii
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#news">News</a>
+            <a href="#about">About</a>
+            <a href="#form">Form</a>
+            <a href="#contact">Contact</a>
+            <a href="#login">Login</a>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+    </header>
+    <main>
+        <h1>Welcome to Xofii!</h1>
+        
+        <div class="sort-by">
+            <label for="sort-options">Sort by:</label>
+            <select id="sort-options">
+                <option value="default">Default</option>
+                <option value="title">Title</option>
+                <option value="date">Date</option>
+            </select>
+        </div>
+        
+            <section id="Edukasi">
+                <h2>Edukasi</h2>
+                <div class="video-grid">
+                    <div class="video" data-date="2020-10-18">
+                        <iframe src="https://www.youtube.com/embed/hLtDbAlM1Jc" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2020-07-10">
+                        <iframe src="https://www.youtube.com/embed/j7tj4F6H52c" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2020-08-18">
+                        <iframe src="https://www.youtube.com/embed/AnqZpBuQm14" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2021-03-18">
+                        <iframe src="https://www.youtube.com/embed/ydeCCsnYKJo" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2019-05-18">
+                        <iframe src="https://www.youtube.com/embed/VoC6dYc7oPg" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2018-07-18">
+                        <iframe src="https://www.youtube.com/embed/jIKP6HjS1qQ" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2022-02-18">
+                        <iframe src="https://www.youtube.com/embed/Z0BFhRsAwkU" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2023-07-18">
+                        <iframe src="https://www.youtube.com/embed/U1O76fbYgNo" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2024-01-18">
+                        <iframe src="https://www.youtube.com/embed/IEu5br56hhE" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2021-09-18">
+                        <iframe src="https://www.youtube.com/embed/F78b-4nEp_c" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2024-05-18">
+                        <iframe src="https://www.youtube.com/embed/pxxQlOPKpac" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2022-06-18">
+                        <iframe src="https://www.youtube.com/embed/HAqRRSk5M1Q" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2022-07-18">
+                        <iframe src="https://www.youtube.com/embed/HAqRRSk5M1Q" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2021-07-18">
+                        <iframe src="https://www.youtube.com/embed/fc-QgKzSpG4" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2020-07-18">
+                        <iframe src="https://www.youtube.com/embed/xc2oIDxg5-8" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <div class="video" data-date="2018-07-18">
+                        <iframe src="https://www.youtube.com/embed/gC175wstr4A" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <p>+... Lainnya</p>
+                </div>
+            </section>
+
+            <!-- Section for Berita -->
+            <section id="Berita">
+                <h2>Berita</h2>
+                <div class="video-grid">
+                    <div class="video" data-date="2024-05-10">
+                        <iframe src="https://www.youtube.com/embed/Zl3s2Ji6o2w" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2024-06-15">
+                        <iframe src="https://www.youtube.com/embed/rAGxaKNYts8" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2024-07-22">
+                        <iframe src="https://www.youtube.com/embed/-yXXft0m50o" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2024-08-05">
+                        <iframe src="https://www.youtube.com/embed/DyfcdTkwivc" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2024-09-12">
+                        <iframe src="https://www.youtube.com/embed/s02HQis_O8s" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2024-10-03">
+                        <iframe src="https://www.youtube.com/embed/e50sEG18MSg" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <p>+... Lainnya</p>
+                </div>
+            </section>
+            
+            <!-- Section for Music Video -->
+            <section id="music-video">
+                <h2>Music Video</h2>
+                <div class="video-grid"> <!-- Grid layout -->
+                    <div class="video"data-date="2010-10-10">
+                        <iframe src="https://www.youtube.com/embed/U0TXIXTzJEY" frameborder="0" allowfullscreen></iframe>
+                        <p>il vento d'oro </p>
+                    </div>
+                    <div class="video"data-date="2014-10-10">
+                        <iframe src="https://www.youtube.com/embed/sCmlEAmdMQg" frameborder="0" allowfullscreen title="Akie秋絵 - いのちの名前"></iframe>
+                        <p>【Akie秋絵】いのちの名前 [オリジナルPV]</p>
+                    </div>
+                    <div class="video"data-date="2006-10-10">
+                        <iframe src="https://www.youtube.com/embed/Ci_zad39Uhw" frameborder="0" allowfullscreen></iframe>
+                        <p>【オリジナル楽曲】粛聖!! ロリ神レクイエム☆ _ しぐれうい（9さい） </p>
+                    </div>
+
+                    <div class="video"data-date="2007-10-10">
+                        <iframe src="https://www.youtube.com/embed/saq0a2eG5y4" frameborder="0" allowfullscreen></iframe>
+                        <p>【女性が歌う】ヒロイン_back number (Full Cover by Kobasolo & 杏沙子)</p>
+                    </div>
+        
+                    <div class="video"data-date="2018-10-10">
+                        <iframe src="https://www.youtube.com/embed/Hy9s13hWsoc" frameborder="0" allowfullscreen></iframe>
+                        <p>7!! - Orange Full Version [PV]+Lyrics  </p>
+                    </div>
+        
+                    <div class="video" data-date="2020-10-10">
+                        <iframe src="https://www.youtube.com/embed/bgo9dJB_icw" frameborder="0" allowfullscreen></iframe>
+                        <p>BEASTARS OP - Wild Side (Official Music Video)</p>
+                    </div>
+        
+                    <div class="video"data-date="2023-10-9">
+                        <iframe src="https://www.youtube.com/embed/QJ8P-81gYA8" frameborder="0" allowfullscreen></iframe>
+                        <p>Cö shu Nie – give it back (Official Video) _ TVアニメ『呪術廻戦』第2クール エンディング主題歌  </p>
+                    </div>
+        
+                    <div class="video"data-date="2021-10-10">
+                        <iframe src="https://www.youtube.com/embed/C3GouGa0noM" frameborder="0" allowfullscreen></iframe>
+                        <p>GODS ft. NewJeans (뉴진스) (Official Music Video) _ Worlds 2023 Anthem - League of Legends</p>
+                    </div>
+        
+                    <div class="video"data-date="2022-10-10">
+                        <iframe src="https://www.youtube.com/embed/DAzN019hKhc" frameborder="0" allowfullscreen></iframe>
+                        <p>King Gnu - 硝子窓  </p>
+                    </div>
+        
+                    <div class="video"data-date="2024-05-10">
+                        <iframe src="https://www.youtube.com/embed/UKU4B05fPck" frameborder="0" allowfullscreen></iframe>
+                        <p>Michishirube</p>
+                    </div>
+        
+                    <div class="video"data-date="2021-11-10">
+                        <iframe src="https://www.youtube.com/embed/r105CzDvoo0" frameborder="0" allowfullscreen></iframe>
+                        <p>milet「Anytime Anywhere」MUSIC VIDEO (TVアニメ『葬送のフリーレン』エンディングテーマ)</p>
+                    </div>
+        
+                    <div class="video"data-date="2021-03-10">
+                        <iframe src="https://www.youtube.com/embed/ziInmNuf-QU" frameborder="0" allowfullscreen></iframe>
+                        <p>Omoinotake - Tsubomi</p>
+                    </div> 
+        
+                    <div class="video"data-date="2021-01-10">
+                        <iframe src=" https://www.youtube.com/embed/lM2kcpCjh04" frameborder="0" allowfullscreen></iframe>
+                        <p>Talesweaver OST - Reminiscence</p>
+                    </div>  
+            
+                    <div class="video"data-date="2021-04-10">
+                        <iframe src="https://www.youtube.com/embed/rpVvPAFaoqM" frameborder="0" allowfullscreen></iframe>
+                        <p>tuki.『サクラキミワタシ』Official Music Video </p>
+                    </div>
+        
+                    <div class="video"data-date="2021-07-10">
+                        <iframe src="https://www.youtube.com/embed/B3vsRXOSBqc" frameborder="0" allowfullscreen></iframe>
+                        <p>君に世界 - Eve MV </p>
+                    </div>
+        
+                    <div class="video"data-date="2021-10-15">
+                        <iframe src="https://www.youtube.com/embed/wLaYO08gHqo" frameborder="0" allowfullscreen></iframe>
+                        <p>想い咲く時（TVアニメ『薬屋のひとりごと』挿入歌） </p>
+                    </div>    
+        
+                    <div class="video"data-date="2021-12-09">
+                        <iframe src="https://www.youtube.com/embed/OrmO23ALlEU" frameborder="0" allowfullscreen></iframe>
+                        <p>未来のひとへ - TRUE 5th Anniversary Live Sound! vol.3 ～with Strings〜</p>
+                    </div>
+        
+                    <div class="video"data-date="2021-08-06">
+                        <iframe src="https://www.youtube.com/embed/aE3sBCQpamc" frameborder="0" allowfullscreen></iframe>
+                        <p>未来のひとへ</p>
+                    </div>
+        
+                    <div class="video"data-date="2021-10-10">
+                        <iframe src="https://www.youtube.com/embed/Kvceyq9o0rY" frameborder="0" allowfullscreen></iframe>
+                        <p>白雪 (White Snow) - Eve MV</p>
+                    </div>
+        
+                    <div class="video"data-date="2021-12-11">
+                        <iframe src="https://www.youtube.com/embed/pyDCubgU57g" frameborder="0" allowfullscreen></iframe>
+                        <p>蒼のワルツ - Eve MV</p>
+                    </div>
+        
+                    <div class="video"data-date="2021-02-01">
+                        <iframe src="https://www.youtube.com/embed/uWZ6VyQ-cMI" frameborder="0" allowfullscreen></iframe>
+                        <p>逃避行 - Eve MV</p>
+                    </div>
+                    <p>+... Lainnya</p>
+            </section>
+
+            <!-- Section for Vlog -->
+            <section id="Gaming">
+                <h2>Gaming</h2>
+                <div class="video-grid">
+                    <div class="video" data-date="2010-07-18">
+                        <iframe src="https://www.youtube.com/embed/JA_Srbudoz0" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2011-07-18">
+                        <iframe src="https://www.youtube.com/embed/zLvKheBjWj8" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2012-07-18">
+                        <iframe src="https://www.youtube.com/embed/z4zdzH5c9rU" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2013-07-18">
+                        <iframe src="https://www.youtube.com/embed/9kVMq2TjXTQ" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2014-07-18">
+                        <iframe src="https://www.youtube.com/embed/9cTkmVSA4JM" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2015-07-18">
+                        <iframe src="https://www.youtube.com/embed/zxg7SEoo0Zc" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2016-07-18">                    
+                        <iframe src="https://www.youtube.com/embed/VtXSBuuo8PI" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2017-07-18">
+                        <iframe src="https://www.youtube.com/embed/m0hNZ7Ft8SE" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2018-07-18">
+                        <iframe src="https://www.youtube.com/embed/pCXlxuAL_-Y" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2019-07-18">
+                        <iframe src="https://www.youtube.com/embed/JWwxNg57uhE" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2020-07-18">
+                        <iframe src="https://www.youtube.com/embed/5_KyVnwudn4" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <p>+... Lainnya</p>
+                </div>
+            </section>
+
+            <!-- Section for Vlog -->
+            <section id="vlog">
+                <h2>Vlog</h2>
+                <div class="video-grid">
+                    <div class="video" data-date="2023-07-15">
+                        <iframe src="https://www.youtube.com/embed/ylkHqRXGtAE" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2021-07-17">
+                        <iframe src="https://www.youtube.com/embed/R0mFi56UviQ" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2024-07-20">
+                        <iframe src="https://www.youtube.com/embed/NnpUXZoQBJQ" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2019-07-12">
+                        <iframe src="https://www.youtube.com/embed/XsSyzNdibK4" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2010-07-10">
+                        <iframe src="https://www.youtube.com/embed/2oVNst8jJuo" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video" data-date="2014-07-13">
+                        <iframe src="https://www.youtube.com/embed/PUYMvYcz3ZI" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <p>+... Lainnya</p>
+                </div>
+            </section>
+
+            <!-- Section for Storytelling -->
+            <section id="storytelling">
+                <h2>Storytelling</h2>
+                <div class="video-grid">
+                    <div class="video" data-date="2024-03-29">
+                        <iframe src="https://www.youtube.com/embed/NhL2BBEFXac" frameborder="0" allowfullscreen></iframe>
+                        <p></p>
+                    </div>
+
+                    <div class="video" data-date="2023-03-29">
+                        <iframe src="https://www.youtube.com/embed/nBRCnUOo7fg" frameborder="0" allowfullscreen></iframe>
+                        <p></p>
+                    </div>
+
+                    <div class="video" data-date="2022-03-29">
+                        <iframe src="https://www.youtube.com/embed/oPRYeN27_eI" frameborder="0" allowfullscreen></iframe>
+                        <p></p>
+                    </div>
+
+                    <div class="video" data-date="2021-03-29">
+                        <iframe src="https://www.youtube.com/embed/R0WE4xi6AWE" frameborder="0" allowfullscreen></iframe>
+                        <p></p>
+                    </div>
+                    <p>+... Lainnya</p>
+                    <!-- Tambahkan video lainnya untuk Storytelling -->
+                </div>
+            </section>
+
+            <section id="news">
+                <h2>Berita dan Acara</h2>
+                <p>Temukan semua yang sedang terjadi di Xofii, mulai dari berita dan acara terbaru hingga pengumuman dan pembaruan platform yang paling baru.</p>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <h3>Pembaruan Fitur dan Fungsi</h3>
+                        <img src="Ilustrasi 1.png" class="news-image">
+                        <p>Kami dengan bangga mengumumkan peluncuran fitur baru yang memungkinkan pengguna untuk melakukan streaming secara langsung dengan kualitas tinggi. Selain itu, kami telah memperbaiki beberapa bug yang dilaporkan oleh pengguna untuk meningkatkan pengalaman menonton.</p>
+                    </div>            
+                    <div class="news-item">
+                        <h3>Kebijakan dan Pedoman Komunitas</h3>
+                        <img src="Ilustrasi 3.png" class="news-image">
+                        <p>Mulai bulan depan, Xofii akan menerapkan pembaruan pada kebijakan konten yang mencakup aturan baru mengenai hak cipta dan perlindungan konten. Kami mendorong semua kreator untuk membaca pedoman baru ini untuk menjaga keamanan konten mereka.</p>
+                    </div>
+                    <div class="news-item">
+                        <h3>Inisiatif Kreator</h3>
+                        <img src="Ilustrasi 2.png" class="news-image">
+                        <p>Kami meluncurkan program pelatihan "Xofii Academy" untuk membantu kreator baru dalam mengembangkan keterampilan konten dan pemasaran. Bergabunglah dengan workshop kami dan tingkatkan kemampuan Anda!</p>
+                    </div>
+                    <div class="news-item">
+                        <h3>Kolaborasi dengan Brand atau Artis</h3>
+                        <img src="Ilustrasi 4.png" class="news-image">
+                        <p>Xofii telah menjalin kemitraan dengan beberapa merek ternama untuk menghadirkan konten eksklusif bagi pengguna. Nantikan kolaborasi menarik dengan artis terkenal yang akan segera hadir!</p>
+                    </div>
+                    <div class="news-item">
+                        <h3>Keselamatan dan Keamanan</h3>
+                        <img src="Ilustrasi 5.png" class="news-image">
+                        <p>Kami terus meningkatkan langkah-langkah keamanan di platform kami. Fitur baru untuk melindungi data pengguna dan mendeteksi konten berbahaya kini telah aktif, memberikan pengalaman yang lebih aman bagi semua pengguna.</p>
+                    </div>
+                    <div class="news-item">
+                        <h3>Berita dari Komunitas</h3>
+                        <img src="Ilustrasi 6.png" class="news-image">
+                        <p>Selamat kepada kreator favorit kami, [Nama Kreator], yang baru saja meraih 1 juta pelanggan! Video-videonya yang kreatif dan inspiratif telah menjadi viral di seluruh platform.</p>
+                    </div>
+                    <div class="news-item">
+                        <h3>Inisiatif Sosial dan Lingkungan</h3>
+                        <img src="Ilustrasi 7.png" class="news-image">
+                        <p>Xofii berkomitmen untuk mendukung isu lingkungan. Kami akan meluncurkan kampanye “Xofii Green” yang mendorong kreator untuk menciptakan konten tentang keberlanjutan dan menjaga lingkungan.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about">
+                <h2>About Us</h2>
+                <p>Ini adalah informasi tentang Xofii.</p>
+                <h2>Informasi tentang Kami</h2>
+                <p>Xofii (eXtra Ordinary FIi) adalah platform yang didedikasikan untuk berbagi informasi, berita terbaru, dan video 
+                    menarik. Di website ini, Anda akan menemukan berbagai artikel dan konten multimedia yang bertujuan untuk memberikan wawasan 
+                    dan hiburan kepada pengunjung. Kami percaya bahwa informasi yang berkualitas dapat menjadi sumber inspirasi dan pengetahuan 
+                    bagi semua orang. Selain itu, Xofii juga berkomitmen untuk menyediakan ruang di mana setiap orang dapat menyuarakan pendapatnya, 
+                    berbagi pengalaman, serta membangun komunitas global melalui cerita yang dibagikan.
+    
+                    Selamat datang di Xofii!</p>
+            </section>
+
+            <section id="form">
+                <h2>Form</h2>
+                <h2>Isi Form di Bawah Ini</h2>
+                <form action="terima_kasih.html" method="get">
+                    <label for="name">Nama:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="comments">Komentar Anda tentang website Xofii:</label>
+                    <textarea id="comments" name="comments" rows="4" cols="50" placeholder="Tulis komentar Anda di sini..."></textarea>
+                    
+                    <input type="submit" value="Kirim">
+                </form>
+                <p>
+                    Dengan mengisi form ini, Anda membantu kami mengumpulkan informasi yang berharga, seperti kontak dan umpan balik. Data ini akan digunakan untuk memahami pembaca kami lebih baik dan meningkatkan konten serta layanan yang kami tawarkan di blog ini.
+                </p>
+            </section>
+    
+            <!-- Konten untuk Terima Kasih -->
+            <section id="thank-you" style="display:none;">
+                <h2>Terima Kasih</h2>
+                <p>Terima kasih sudah mengisi form. Kami menghargai masukan Anda.</p>
+            </section>
+
+        <!-- Konten untuk Contact -->
+        <section id="contact">
+            <h2>Informasi Kontak</h2>
+            <p>Email: <a href="mailto:xofii@gmail.com">xofii@gmail.com</a></p>
+            <p>Instagram: <a href="https://www.instagram.com/nftryhr_?igsh=MWN0Yms2NWJrc3hqMQ==" target="_blank">Instagram Profile</a></p>
+            <p>Facebook: <a href="https://www.facebook.com/share/LCNnWePTcqrJEAoG/?mibextid=qi2Omg" target="_blank">Facebook Profile</a></p>
+            <p>Telepon: (0x0) 000xx00xx</p>
+        </section>
+
+        <!-- Konten untuk Login -->
+        <section id="login">
+            <h2>Silakan Masuk</h2>
+            <p>Dengan login, Anda dapat menyimpan preferensi, riwayat, dan pengaturan pengguna Anda. Selain itu, Anda akan dapat mengakses konten yang tidak tersedia untuk pengguna umum. Ini bisa berupa artikel, fitur, atau layanan eksklusif setelah Anda masuk.</p>
+            <!-- Form login yang mengarah ke dashboard.html -->
+            <form action="dashboard.html" method="get">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required> <br>
+                <input type="submit" value="Login">
+            </form>
+            <p>Belum punya akun? <a href="#register">Daftar di sini</a></p> <!-- Link ke form pendaftaran -->
+        </section>
+
+        <!-- Form pendaftaran -->
+        <section id="register" class="hidden">
+            <h2>Daftar Akun Baru</h2>
+            <!-- Form register yang mengarah ke dashboard1.html -->
+            <form action="dashboard1.html" method="get"> <!-- Action diperbarui -->
+                <label for="new-username">Username:</label>
+                <input type="text" id="new-username" name="new-username" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="new-password">Password:</label>
+                <input type="password" id="new-password" name="new-password" required> <br>
+                <input type="submit" value="Daftar">
+            </form>
+            <p>Sudah punya akun? <a href="#login">Login di sini</a></p> <!-- Link ke form login -->
+        </section>
+
+        <!-- Dashboard setelah login -->
+        <section id="dashboard" style="display:none;">
+            <h2>Welcome to Xofii</h2>
+            <p>Kamu Berhasil Login!</p>
+        </section>
+
+        <!-- Dashboard setelah pendaftaran -->
+        <section id="dashboard-1" style="display:none;">
+            <h2>Welcome to Xofii</h2>
+            <p>Kamu Berhasil Daftar!</p>
+        </section>
+
+        <script>
+            document.getElementById('sort-options').addEventListener('change', function () {
+                const sortBy = this.value;
+                const videoGrid = document.querySelector('.video-grid');
+                const videos = Array.from(videoGrid.querySelectorAll('.video'));
+
+                let sortedVideos;
+                if (sortBy === 'title') {
+                    sortedVideos = videos.sort((a, b) => {
+                        const titleA = a.querySelector('p').textContent.toLowerCase();
+                        const titleB = b.querySelector('p').textContent.toLowerCase();
+                        return titleA.localeCompare(titleB);
+                    });
+                } else if (sortBy === 'date') {
+                    sortedVideos = videos.sort((a, b) => {
+                        const dateA = new Date(a.dataset.date);
+                        const dateB = new Date(b.dataset.date);
+                        return dateA - dateB;
+                    });
+                } else {
+                    sortedVideos = videos;
+                }
+
+                videoGrid.innerHTML = '';
+                sortedVideos.forEach(video => videoGrid.appendChild(video));
+            });
+        </script>
+    </main>
+    <footer>
+        <p>&copy; 2024 Nur Fitriyah Ramadhani. PTIK A 23</p>
+    </footer>
+</body>
+</html>
